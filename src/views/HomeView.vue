@@ -30,7 +30,7 @@ export default {
   <div v-for="resort in resorts" v-bind:key="resort.id">
     <h2>{{ resort.name }}</h2>
     <p>Opening Day: {{ resort.opening_day }}</p>
-    <p><button v-on:click="showResort(resort)">More info</button></p>
+    <p><a v-bind:href="`/resorts/${resort.id}.json`">More info</a></p>
   </div>
 </template>
 
