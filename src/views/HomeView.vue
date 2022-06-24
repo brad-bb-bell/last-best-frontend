@@ -1,18 +1,37 @@
-<template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
-</template>
-
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import axios from "axios";
 
 export default {
-  name: "HomeView",
-  components: {
-    HelloWorld,
+  data: function () {
+    return {
+      message: "Last Best Ski Resort App",
+      resorts: [],
+    };
+  },
+  created: function () {
+    this.indexResorts();
+  },
+  methods: {
+    indexResorts: function () {
+      axios.get("http://localhost:3000/resorts.json").then((response) => {
+        this.resorts = response.data;
+        console.log(response.data);
+      });
+    },
+    showResort: function () {},
   },
 };
 </script>
+
+<template>
+  <div class="home">
+    <h1>{{ message }}</h1>
+  </div>
+  <div v-for="resort in resorts" v-bind:key="resort.id">
+    <h2>{{ resort.name }}</h2>
+    <p>Opening Day: {{ resort.opening_day }}</p>
+    <p><button v-on:click="showResort(resort)">More info</button></p>
+  </div>
+</template>
+
+<style></style>
