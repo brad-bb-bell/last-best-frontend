@@ -5,6 +5,7 @@ import EventView from "../views/EventView.vue";
 import SignupView from "../views/SignupView.vue";
 import LoginView from "../views/LoginView.vue";
 import LogoutView from "../views/LogoutView.vue";
+import ProfileView from "../views/ProfileView.vue";
 
 const routes = [
   {
@@ -36,6 +37,11 @@ const routes = [
     path: "/logout/",
     name: "logout",
     component: LogoutView,
+  },
+  {
+    path: "/users/:id",
+    name: "profile",
+    component: ProfileView,
   },
 ];
 
