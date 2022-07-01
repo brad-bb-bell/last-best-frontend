@@ -23,7 +23,7 @@ export default {
     |
     <router-link to="/login" v-if="!isLoggedIn">Login</router-link>
     |
-    <router-link to="/users/10" v-if="isLoggedIn">Profile</router-link>
+    <!-- <router-link v-if="isLoggedIn" :to="{ path: '/users/' + localStorage.user_id }">Profile</router-link> -->
     |
     <router-link to="/logout" v-if="isLoggedIn">Logout</router-link>
   </nav>
