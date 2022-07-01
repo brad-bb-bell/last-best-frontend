@@ -3,9 +3,12 @@ export default {
   data: function () {
     return {
       isLoggedIn: false,
+      user_id: null,
     };
   },
-  created: function () {},
+  created: function () {
+    this.user_id = localStorage.user_id;
+  },
   methods: {},
   watch: {
     $route: function () {
@@ -19,11 +22,13 @@ export default {
   <nav>
     <router-link to="/">Home</router-link>
     |
+    <router-link to="/events">Events</router-link>
+    |
     <router-link to="/signup" v-if="!isLoggedIn">Signup</router-link>
     |
     <router-link to="/login" v-if="!isLoggedIn">Login</router-link>
     |
-    <!-- <router-link v-if="isLoggedIn" :to="{ path: '/users/' + localStorage.user_id }">Profile</router-link> -->
+    <router-link v-if="isLoggedIn" :to="`/users/${user_id}`">Profile</router-link>
     |
     <router-link to="/logout" v-if="isLoggedIn">Logout</router-link>
   </nav>

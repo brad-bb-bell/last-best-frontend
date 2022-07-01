@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import ResortView from "../views/ResortView.vue";
 import EventView from "../views/EventView.vue";
+import EventIndex from "../views/EventIndex.vue";
 import SignupView from "../views/SignupView.vue";
 import LoginView from "../views/LoginView.vue";
 import LogoutView from "../views/LogoutView.vue";
@@ -22,6 +23,11 @@ const routes = [
     path: "/events/:id",
     name: "events-show",
     component: EventView,
+  },
+  {
+    path: "/events/",
+    name: "events-index",
+    component: EventIndex,
   },
   {
     path: "/signup/",

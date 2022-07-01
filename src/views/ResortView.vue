@@ -28,6 +28,7 @@ export default {
 <template>
   <div class="resorts-show">
     <h1>{{ resort.name }}</h1>
+    <p><img v-bind:src="resort.image" v-bind:key="resort.id" v-bind:alt="resort.name" /></p>
     <p>Opening Day: {{ resort.opening_day }}</p>
     <p>Ticket Price: ${{ resort.ticket_price }}</p>
   </div>
