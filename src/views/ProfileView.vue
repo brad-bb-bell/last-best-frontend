@@ -27,6 +27,8 @@ export default {
     <h1>{{ user.username }}</h1>
   </div>
   home resort: {{ user.home_resort_id }}
+  <br />
+  ski days this season: {{ user.days_skied }}
   <div v-for="toDoResort in toDoResorts" v-bind:key="toDoResort.id">to do resort: {{ toDoResort.id }}</div>
   <div v-for="favoriteResort in favoriteResorts" v-bind:key="favoriteResort.id">
     favorite resort: {{ favoriteResort.id }}
