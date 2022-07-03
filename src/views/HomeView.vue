@@ -8,6 +8,9 @@ export default {
       resorts: [],
       user: {},
       newConditionsReport: {},
+      onChange(resort) {
+        console.log(resort);
+      },
       // homeResort: "",
       // homeResortLogo: "",
     };
@@ -48,7 +51,12 @@ export default {
     createConditionsReport: function () {
       document.querySelector("#conditions-report").showModal();
     },
-    submitConditionsReport: function () {},
+    submitConditionsReport: function () {
+      axios.post("/conditions_reports", this.newConditionsReport).then((response) => {
+        console.log("Success", response.data);
+        this.$router.push("/");
+      });
+    },
   },
 };
 </script>
@@ -60,6 +68,7 @@ export default {
     <button v-on:click="createConditionsReport()">Yes</button>
     Total ski days this season: {{ user.days_skied }}
   </div>
+
   <div v-for="resort in resorts" v-bind:key="resort.id">
     <h2>
       <a v-on:click="showResort(resort.id)">{{ resort.name }}</a>
@@ -71,7 +80,7 @@ export default {
     <form method="dialog">
       <h1>How was it out there?</h1>
       <label for="resort">Resort:</label>
-      <select name="resort" id="resort">
+      <select name="resort" @change="onChange($event)">
         <option v-for="resort in resorts" v-bind:key="resort.id" value="resort">{{ resort.name }}</option>
       </select>
       <br />
@@ -80,7 +89,10 @@ export default {
       <div>
         Conditions:
         <input type="text" v-model="newConditionsReport.comment" />
-        <p><button v-on:click="submitConditionsReport()">Save</button></p>
+        <p>
+          <button v-on:click="submitConditionsReport()">Save</button>
+          <button on:click="close">Cancel</button>
+        </p>
       </div>
     </form>
   </dialog>
