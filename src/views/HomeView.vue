@@ -6,10 +6,10 @@ export default {
     return {
       message: "Last Best Ski Resort App",
       resorts: [],
+      resort_id: "",
+      resortOfTheDay: "",
       user: {},
       newConditionsReport: {},
-      // homeResort: "",
-      // homeResortLogo: "",
     };
   },
   created: function () {
@@ -30,12 +30,11 @@ export default {
       axios.get("/resorts.json").then((response) => {
         this.resorts = response.data;
         this.resorts = this.resorts.sort(this.compare);
+        this.resortOfTheDay = this.resorts[Math.floor(Math.random() * this.resorts.length)];
+        console.log("ROTD", this.resortOfTheDay);
         this.newConditionsReport.resort_id = this.resorts[0].id;
         this.newConditionsReport.user_id = localStorage.user_id;
         console.log("Resorts", response.data);
-        // var homeResortIndex = this.user.home_resort_id - 1;
-        // this.homeResort = this.resorts[homeResortIndex].name;
-        // this.homeResortLogo = this.resorts[homeResortIndex].logo;
       });
     },
     showUser: function () {
@@ -51,10 +50,13 @@ export default {
       document.querySelector("#conditions-report").showModal();
     },
     submitConditionsReport: function () {
+      this.resort_id = this.newConditionsReport.resort_id;
       axios.post("/conditions_reports", this.newConditionsReport).then((response) => {
         console.log("Success", response.data);
-        this.$router.push("/");
+        this.$router.push("/resorts/" + this.resort_id + ".json");
       });
+      axios.patch("/users/" + localStorage.user_id + ".json");
+      this.newConditionsReport = {};
     },
     onChange: function (resort) {
       this.newConditionsReport.resort_id = resort.target.value;
@@ -71,13 +73,11 @@ export default {
     Total ski days this season: {{ user.days_skied }}
     <p></p>
   </div>
+  <div>
+    <h3>Resort of the day: {{ resortOfTheDay.name }}</h3>
+    <img v-bind:src="resortOfTheDay.image" v-bind:key="resortOfTheDay.id" v-bind:alt="resortOfTheDay.name" />
+  </div>
 
-  <!-- <div v-for="resort in resorts" v-bind:key="resort.id">
-    <h2>
-      <a v-on:click="showResort(resort.id)">{{ resort.name }}</a>
-    </h2>
-    <p>Opening Day: {{ resort.opening_day }}</p>
-  </div> -->
   <table class="table table-hover table-bordered">
     <thead class="thead-dark">
       <tr>
