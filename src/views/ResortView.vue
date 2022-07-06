@@ -1,26 +1,59 @@
 <script>
+// import { throwStatement } from "@babel/types";
 import axios from "axios";
 export default {
   data: function () {
     return {
       resort: {},
+      resortName: "",
       events: [],
       conditions_reports: [],
       currentEvent: {},
+      userToDos: [],
+      userFavs: [],
+      newTodoResort: {},
+      newFavResort: {},
+      isToDo: false,
+      isFavorite: false,
     };
   },
   created: function () {
     axios.get("/resorts/" + this.$route.params.id).then((response) => {
       this.resort = response.data;
+      this.resortName = this.resort.name;
       this.events = this.resort.events;
       this.conditions_reports = this.resort.conditions_reports.reverse();
       console.log(response.data);
+    });
+    axios.get("/users/" + localStorage.user_id + ".json").then((response) => {
+      this.userToDos = response.data.to_do_resorts;
+      this.userFavs = response.data.favorite_resorts;
+      this.userToDos.forEach((toDoResort) => {
+        if (this.resortName === toDoResort.name) {
+          this.isToDo = true;
+        }
+      });
+      this.userFavs.forEach((favResort) => {
+        if (this.resortName === favResort.name) {
+          this.isFavorite = true;
+        }
+      });
     });
   },
   methods: {
     showEvent: function (event) {
       this.$router.push("/events/" + event + ".json");
     },
+    toDoResort: function () {
+      if (this.isToDo == false) {
+        this.newTodoResort.user_id = localStorage.user_id;
+        this.newTodoResort.resort_id = this.resort.id;
+        axios.post("/to_do_resorts/", this.newTodoResort).then((response) => {
+          console.log("Success", response.data);
+        });
+      }
+    },
+    favoriteResort: function () {},
   },
 };
 </script>
@@ -28,6 +61,10 @@ export default {
 <template>
   <div class="resorts-show">
     <h1>{{ resort.name }}</h1>
+    To Do
+    <input type="checkbox" v-model="isToDo" v-on:click="toDoResort()" />
+    Favorite
+    <input type="checkbox" v-model="isFavorite" v-on:click="favoriteResort()" />
     <p><img v-bind:src="resort.image" v-bind:key="resort.id" v-bind:alt="resort.name" /></p>
     <table class="table table-hover table-bordered">
       <thead class="thead-dark">
