@@ -41,6 +41,7 @@ export default {
       axios.get("/users/" + localStorage.user_id + ".json").then((response) => {
         this.user = response.data;
         console.log("Current user", response.data);
+        localStorage.setItem("home_resort_id", response.data.home_resort_id);
       });
     },
     showResort: function (resort) {
