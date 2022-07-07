@@ -12,7 +12,9 @@ export default {
       userToDos: [],
       userFavs: [],
       newTodoResort: {},
+      toDoResortId: "",
       newFavResort: {},
+      favResortId: "",
       isToDo: false,
       isFavorite: false,
     };
@@ -31,11 +33,15 @@ export default {
       this.userToDos.forEach((toDoResort) => {
         if (this.resortName === toDoResort.name) {
           this.isToDo = true;
+          this.toDoResortId = toDoResort.id;
+          console.log("to do id", this.toDoResortId);
         }
       });
       this.userFavs.forEach((favResort) => {
         if (this.resortName === favResort.name) {
           this.isFavorite = true;
+          this.favResortId = favResort.id;
+          console.log("fav id", this.favResortId);
         }
       });
     });
@@ -50,10 +56,28 @@ export default {
         this.newTodoResort.resort_id = this.resort.id;
         axios.post("/to_do_resorts/", this.newTodoResort).then((response) => {
           console.log("Success", response.data);
+          this.toDoResortId = response.data.id;
+        });
+      } else {
+        axios.delete("/to_do_resorts/" + this.toDoResortId + ".json").then((response) => {
+          console.log("Success,", response.data);
         });
       }
     },
-    favoriteResort: function () {},
+    favoriteResort: function () {
+      if (this.isFavorite == false) {
+        this.newFavResort.user_id = localStorage.user_id;
+        this.newFavResort.resort_id = this.resort.id;
+        axios.post("/favorite_resorts/", this.newFavResort).then((response) => {
+          console.log("Success", response.data);
+          this.favResortId = response.data.id;
+        });
+      } else {
+        axios.delete("/favorite_resorts/" + this.favResortId + ".json").then((response) => {
+          console.log("Success,", response.data);
+        });
+      }
+    },
   },
 };
 </script>
