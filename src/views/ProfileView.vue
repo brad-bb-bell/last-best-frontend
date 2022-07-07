@@ -24,7 +24,11 @@ export default {
       });
     });
   },
-  methods: {},
+  methods: {
+    showResort: function (resort) {
+      this.$router.push("/resorts/" + resort + ".json");
+    },
+  },
 };
 </script>
 
@@ -34,15 +38,30 @@ export default {
     ski days this season: {{ user.days_skied }}
   </div>
   home resort: {{ homeResort.name }}
-  <img v-bind:src="homeResort.logo" v-bind:key="homeResort.id" v-bind:alt="homeResort.name" />
+  <img
+    v-bind:src="homeResort.logo"
+    v-bind:key="homeResort.id"
+    v-bind:alt="homeResort.name"
+    v-on:click="showResort(homeResort.id)"
+  />
   <br />
   <div v-for="toDoResort in toDoResorts" v-bind:key="toDoResort.id">
     to do resort: {{ toDoResort.name }}
-    <img v-bind:src="toDoResort.logo" v-bind:key="toDoResort.id" v-bind:alt="toDoResort.name" />
+    <img
+      v-bind:src="toDoResort.logo"
+      v-bind:key="toDoResort.id"
+      v-bind:alt="toDoResort.name"
+      v-on:click="showResort(toDoResort.resort_id)"
+    />
   </div>
   <div v-for="favoriteResort in favoriteResorts" v-bind:key="favoriteResort.id">
     favorite resort: {{ favoriteResort.name }}
-    <img v-bind:src="favoriteResort.logo" v-bind:key="favoriteResort.id" v-bind:alt="favoriteResort.name" />
+    <img
+      v-bind:src="favoriteResort.logo"
+      v-bind:key="favoriteResort.id"
+      v-bind:alt="favoriteResort.name"
+      v-on:click="showResort(favoriteResort.resort_id)"
+    />
   </div>
 </template>
 

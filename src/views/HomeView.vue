@@ -75,7 +75,10 @@ export default {
     <p></p>
   </div>
   <div>
-    <h3>Resort of the day: {{ resortOfTheDay.name }}</h3>
+    <h3>
+      Resort of the day:
+      <a v-on:click="showResort(resortOfTheDay.id)">{{ resortOfTheDay.name }}</a>
+    </h3>
     <img v-bind:src="resortOfTheDay.image" v-bind:key="resortOfTheDay.id" v-bind:alt="resortOfTheDay.name" />
   </div>
 
