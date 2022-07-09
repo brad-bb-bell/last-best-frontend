@@ -19,41 +19,52 @@ export default {
 </script>
 
 <template>
-  <nav>
-    <router-link to="/">Home</router-link>
-    |
-    <router-link to="/events">Events</router-link>
-    |
-    <router-link to="/signup" v-if="!isLoggedIn">Signup</router-link>
-    |
-    <router-link to="/login" v-if="!isLoggedIn">Login</router-link>
-    |
-    <router-link v-if="isLoggedIn" :to="`/users/${user_id}`">Profile</router-link>
-    |
-    <router-link to="/logout" v-if="isLoggedIn">Logout</router-link>
+  <header>
+    <h1 class="site-heading text-center text-faded d-none d-lg-block">
+      <span class="site-heading-upper text-primary mb-3">A Montana Ski Resort App</span>
+      <span class="site-heading-lower">Last Best</span>
+    </h1>
+  </header>
+  <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand text-uppercase fw-bold d-lg-none" href="/">Last Best</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="/">Home</a></li>
+          <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="/events">Events</a></li>
+          <li class="nav-item px-lg-4" v-if="!isLoggedIn">
+            <router-link class="nav-link text-uppercase" to="/signup" v-if="!isLoggedIn">Signup</router-link>
+          </li>
+          <li class="nav-item px-lg-4" v-if="!isLoggedIn">
+            <router-link class="nav-link text-uppercase" to="/login" v-if="!isLoggedIn">Login</router-link>
+          </li>
+          <li class="nav-item px-lg-4">
+            <router-link class="nav-link text-uppercase" v-if="isLoggedIn" :to="`/users/${user_id}`">
+              Profile
+            </router-link>
+          </li>
+          <li class="nav-item px-lg-4">
+            <router-link class="nav-link text-uppercase" to="/logout" v-if="isLoggedIn">Logout</router-link>
+          </li>
+        </ul>
+      </div>
+    </div>
   </nav>
   <router-view />
+  <footer class="footer text-faded text-center py-5">
+    <div class="container"><p class="m-0 small"></p></div>
+  </footer>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+<style></style>

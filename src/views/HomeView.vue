@@ -67,20 +67,50 @@ export default {
 </script>
 
 <template>
-  <div class="home">
-    <h1>Welcome back {{ user.username }}!</h1>
-    Did you ski today?
-    <button v-on:click="createConditionsReport()">Yes</button>
-    Total ski days this season: {{ user.days_skied }}
-    <p></p>
-  </div>
-  <div>
-    <h3>
-      Resort of the day:
-      <a v-on:click="showResort(resortOfTheDay.id)">{{ resortOfTheDay.name }}</a>
-    </h3>
-    <img v-bind:src="resortOfTheDay.image" v-bind:key="resortOfTheDay.id" v-bind:alt="resortOfTheDay.name" />
-  </div>
+  <section class="page-section clearfix">
+    <div class="container">
+      <div class="intro">
+        <a v-on:click="showResort(resortOfTheDay.id)">
+          <img
+            class="intro-img img-fluid mb-3 mb-lg-0 rounded"
+            v-bind:src="resortOfTheDay.image"
+            v-bind:alt="resortOfTheDay.name"
+          />
+        </a>
+        <div class="intro-text left-0 text-center bg-faded p-5 rounded">
+          <h2 class="section-heading mb-4">
+            <span class="section-heading-upper">Welcome Back</span>
+            <span class="section-heading-lower">{{ user.username }}</span>
+            <span class="section-heading-upper">ski days: {{ user.days_skied }}</span>
+          </h2>
+          <p class="mb-3">
+            Did you ski or snowboard today? Please take the time to rate your day and submit a conditions report to help
+            community members get an honest sense of the current conditions.
+          </p>
+          <div class="intro-button mx-auto">
+            <a class="btn btn-primary btn-xl" v-on:click="createConditionsReport()">Conditions Report</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="page-section cta">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-9 mx-auto">
+          <div class="cta-inner bg-faded text-center rounded">
+            <h2 class="section-heading mb-4">
+              <span class="section-heading-upper">Resort of the Day</span>
+              <span class="section-heading-lower">
+                <a v-on:click="showResort(resortOfTheDay.id)">{{ resortOfTheDay.name }}</a>
+              </span>
+            </h2>
+            <p class="mb-3">A fun fact will be here. It will be interesting and/or cool.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <table class="table table-hover table-bordered">
     <thead class="thead-dark">

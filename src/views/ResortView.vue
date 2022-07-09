@@ -83,70 +83,129 @@ export default {
 </script>
 
 <template>
-  <div class="resorts-show">
-    <h1>{{ resort.name }}</h1>
-    To Do
-    <input type="checkbox" v-model="isToDo" v-on:click="toDoResort()" />
-    Favorite
-    <input type="checkbox" v-model="isFavorite" v-on:click="favoriteResort()" />
-    <p><img v-bind:src="resort.image" v-bind:key="resort.id" v-bind:alt="resort.name" /></p>
-    <table class="table table-hover table-bordered">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">Resort</th>
-          <th scope="col">Vertical</th>
-          <th scope="col">Acres</th>
-          <th scope="col">Elevation Top</th>
-          <th scope="col">Elevation Base</th>
-          <th scope="col">Avg Snowfall</th>
-          <th scope="col">Chair lifts</th>
-          <th scope="col">Surface Lifts</th>
-          <th scope="col">Total lifts</th>
-          <th scope="col">Terrain Park</th>
-          <th scope="col">Night Skiing</th>
-          <th scope="col">Ticket Price</th>
-          <th scope="col">Opening Day</th>
-          <th scope="col">Closing Day</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th>{{ resort.name }}</th>
-          <td>{{ resort.vertical_gain }}'</td>
-          <td>{{ resort.acres }}</td>
-          <td>{{ resort.elevation_top }}'</td>
-          <td>{{ resort.elevation_base }}'</td>
-          <td>{{ resort.average_snowfall }}"</td>
-          <td>{{ resort.chairlifts }}</td>
-          <td>{{ resort.surface_lifts }}</td>
-          <td>{{ resort.total_lifts }}</td>
-          <td>{{ resort.terrain_park }}</td>
-          <td>{{ resort.night_skiing }}</td>
-          <td>${{ resort.ticket_price }}</td>
-          <td>{{ resort.opening_day }}</td>
-          <td>{{ resort.closing_day }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="resorts-show-conditions">
-    <h2>Latest Conditions Reports</h2>
-    <p></p>
-    <div v-for="conditions_report in conditions_reports" v-bind:key="conditions_report.id">
-      {{ conditions_report.created_at }} by {{ conditions_report.reported_by }}
-      <br />
-      <h4>{{ conditions_report.rating }}/5: {{ conditions_report.comment }}</h4>
-      <p></p>
+  <section class="page-section">
+    <div class="container">
+      <div class="product-item">
+        <div class="product-item-title d-flex">
+          <div class="bg-faded p-5 d-flex ms-auto rounded">
+            <h2 class="section-heading mb-0">
+              <span class="section-heading-upper">
+                <input type="checkbox" v-model="isToDo" v-on:click="toDoResort()" />
+                To Do
+              </span>
+              <span class="section-heading-upper">
+                <input type="checkbox" v-model="isFavorite" v-on:click="favoriteResort()" />
+                Favorite
+              </span>
+            </h2>
+          </div>
+        </div>
+        <img
+          class="img-fluid rounded about-heading-img mb-3 mb-lg-0"
+          v-bind:src="resort.image"
+          v-bind:alt="resort.name"
+        />
+        <div class="product-item-description d-flex me-auto">
+          <div class="bg-faded p-5 rounded">
+            <span class="section-heading-upper">
+              <h1>{{ resort.name }}</h1>
+            </span>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="resorts-show-events">
-    <h1>Upcoming Events</h1>
-    <div v-for="event in events" v-bind:key="event.id">
-      <h3>
-        <a v-on:click="showEvent(event.id)">{{ event.name }}</a>
-      </h3>
+  </section>
+  <table class="table table-hover table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Resort</th>
+        <th scope="col">Vertical</th>
+        <th scope="col">Acres</th>
+        <th scope="col">Elevation Top</th>
+        <th scope="col">Elevation Base</th>
+        <th scope="col">Avg Snowfall</th>
+        <th scope="col">Chair lifts</th>
+        <th scope="col">Surface Lifts</th>
+        <th scope="col">Total lifts</th>
+        <th scope="col">Terrain Park</th>
+        <th scope="col">Night Skiing</th>
+        <th scope="col">Ticket Price</th>
+        <th scope="col">Opening Day</th>
+        <th scope="col">Closing Day</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th>{{ resort.name }}</th>
+        <td>{{ resort.vertical_gain }}'</td>
+        <td>{{ resort.acres }}</td>
+        <td>{{ resort.elevation_top }}'</td>
+        <td>{{ resort.elevation_base }}'</td>
+        <td>{{ resort.average_snowfall }}"</td>
+        <td>{{ resort.chairlifts }}</td>
+        <td>{{ resort.surface_lifts }}</td>
+        <td>{{ resort.total_lifts }}</td>
+        <td>{{ resort.terrain_park }}</td>
+        <td>{{ resort.night_skiing }}</td>
+        <td>${{ resort.ticket_price }}</td>
+        <td>{{ resort.opening_day }}</td>
+        <td>{{ resort.closing_day }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <section class="page-section cta">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-9 mx-auto">
+          <div class="cta-inner bg-faded text-center rounded">
+            <h2 class="section-heading mb-5">
+              <span class="section-heading-upper">{{ resort.name }}</span>
+              <span class="section-heading-lower">Recent conditions reports</span>
+            </h2>
+            <ul
+              class="list-unstyled list-hours mb-5 text-left mx-auto"
+              v-for="conditions_report in conditions_reports"
+              v-bind:key="conditions_report.id"
+            >
+              <li class="list-unstyled-item list-hours-item d-flex">
+                {{ conditions_report.rating }}/5
+                <span class="ms-auto">{{ conditions_report.reported_by }} on {{ conditions_report.created_at }}</span>
+              </li>
+              <li class="list-unstyled-item list-hours-item d-flex">
+                {{ conditions_report.comment }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
+  <section class="page-section cta">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-9 mx-auto">
+          <div class="cta-inner bg-faded text-center rounded">
+            <h2 class="section-heading mb-5">
+              <span class="section-heading-upper">{{ resort.name }}</span>
+              <span class="section-heading-lower">Upcoming Events</span>
+            </h2>
+            <ul class="list-unstyled list-hours mb-5 text-left mx-auto" v-for="event in events" v-bind:key="event.id">
+              <li class="list-unstyled-item list-hours-item d-flex">
+                {{ event.date }}
+                <span class="ms-auto">
+                  <a v-bind:href="event.link">{{ event.name }}</a>
+                </span>
+              </li>
+              <li class="list-unstyled-item list-hours-item d-flex">
+                {{ resort.name }}
+                <span class="ms-auto">9:00 AM</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </template>
 
 <style></style>
