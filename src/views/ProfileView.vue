@@ -49,8 +49,20 @@ export default {
           v-bind:src="homeResort.image"
           v-bind:alt="homeResort.name"
         />
-        <div class="product-item-description d-flex ms-auto">
-          <div class="bg-faded p-5 rounded">
+      </div>
+    </div>
+  </section>
+  <section class="page-section cta">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-9 mx-auto">
+          <div class="cta-inner bg-faded text-center rounded">
+            <h2 class="section-heading mb-4">
+              <span class="section-heading-lower">Stats</span>
+            </h2>
+            <h2 class="section-heading mb-4">
+              <span class="section-heading-upper">Days by rating</span>
+            </h2>
             <p class="mb-0">
               ⭐⭐⭐⭐⭐: 5 days, 33%
               <br />
@@ -61,6 +73,17 @@ export default {
               ⭐⭐: 2 days, 13%
               <br />
               ⭐: 1 day, 7%
+            </p>
+            <p></p>
+            <h2 class="section-heading mb-4">
+              <span class="section-heading-upper">Days by Resort</span>
+            </h2>
+            <p class="mb-0">
+              Bridger Bowl: 12 days, 73%
+              <br />
+              Big Sky: 3 days, 20%
+              <br />
+              Whitefish: 1 days, 7%
             </p>
           </div>
         </div>

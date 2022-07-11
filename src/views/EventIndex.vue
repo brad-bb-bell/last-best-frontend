@@ -14,6 +14,7 @@ export default {
     indexEvents: function () {
       axios.get("/events.json").then((response) => {
         this.events = response.data;
+        this.events = this.events.sort(this.compare);
         console.log("Events", response.data);
       });
     },
@@ -22,6 +23,15 @@ export default {
     },
     showResort: function (resort) {
       this.$router.push("/resorts/" + resort + ".json");
+    },
+    compare: function (a, b) {
+      if (a.date < b.date) {
+        return -1;
+      }
+      if (a.date > b.date) {
+        return 1;
+      }
+      return 0;
     },
   },
 };

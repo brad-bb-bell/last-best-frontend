@@ -32,8 +32,8 @@ export default {
         <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
       </ul>
       <div>
-        <label>Name:</label>
-        <input type="text" v-model="newUserParams.name" />
+        <label>Create Username:</label>
+        <input type="username" v-model="newUserParams.username" />
       </div>
       <div>
         <label>Email:</label>

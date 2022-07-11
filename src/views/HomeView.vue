@@ -1,4 +1,5 @@
 <script>
+/* global mapboxgl */
 import axios from "axios";
 
 export default {
@@ -10,6 +11,26 @@ export default {
       resortOfTheDay: "",
       user: {},
       newConditionsReport: {},
+      token: "pk.eyJ1IjoiYmFsbGluYmIiLCJhIjoiY2w0ZnRmcjc2MDB2ZjNicGNleGs3djhkdSJ9.lYex_nYgLLaSNFDQTe5NJw",
+      places: [
+        { lat: 45.8174, lng: -110.8966, description: "Bridger Bowl" },
+        { lat: 45.2458, lng: -111.3745, description: "Yellowstone Club" },
+        { lat: 45.2857, lng: -111.4012, description: "Big Sky" },
+        { lat: 48.4806, lng: -114.3503, description: "Whitefish" },
+        { lat: 45.1908, lng: -109.3364, description: "Red Lodge" },
+        { lat: 45.6923, lng: -113.9521, description: "Lost Trail" },
+        { lat: 46.2496, lng: -113.2384, description: "Discovery" },
+        { lat: 46.7531, lng: -112.3135, description: "Great Divide" },
+        { lat: 47.0144, lng: -113.9996, description: "Montana Snowbowl" },
+        { lat: 45.4339, lng: -113.1286, description: "Maverick Mountain" },
+        { lat: 46.8384, lng: -110.7005, description: "Showdown" },
+        { lat: 48.0148, lng: -114.3696, description: "Blacktail Mountain" },
+        { lat: 48.605, lng: -115.6308, description: "Turner Mountain" },
+        { lat: 47.9298, lng: -112.811, description: "Teton Pass" },
+        { lat: 48.5184, lng: -109.1279, description: "Bear Paw Ski Bowl" },
+        { lat: 44.9751, lng: -109.4348, description: "Beartooth Basin" },
+        { lat: 47.456, lng: -115.69753, description: "Lookout Pass" },
+      ],
     };
   },
   created: function () {
@@ -63,6 +84,23 @@ export default {
       this.newConditionsReport.resort_id = resort.target.value;
     },
   },
+  mounted: function () {
+    mapboxgl.accessToken = this.token;
+    const map = new mapboxgl.Map({
+      container: "map", // container ID
+      style: "mapbox://styles/mapbox/outdoors-v11", // style URL
+      center: [-112.2097, 47.0], // starting position [lng, lat]
+      zoom: 6, // starting zoom
+    });
+    this.places.forEach((place) => {
+      new mapboxgl.Marker().setLngLat([place.lng, place.lat]).addTo(map);
+      new mapboxgl.Popup({ closeOnClick: false })
+        .setLngLat([place.lng, place.lat])
+        .setHTML("<small>" + place.description + "</small>")
+        .addTo(map);
+    });
+    console.log(map);
+  },
 };
 </script>
 
@@ -84,8 +122,8 @@ export default {
             <span class="section-heading-upper">ski days: {{ user.days_skied }}</span>
           </h2>
           <p class="mb-3">
-            Did you ski or snowboard today? Please take the time to rate your day and submit a conditions report to help
-            community members get an honest sense of the current conditions.
+            Did you ski or snowboard today? Rate your day and submit a conditions report to help community members get a
+            sense of the current conditions.
           </p>
           <div class="intro-button mx-auto">
             <a class="btn btn-primary btn-xl" v-on:click="createConditionsReport()">Conditions Report</a>
@@ -152,9 +190,13 @@ export default {
       </tr>
     </tbody>
   </table>
+  <div>
+    <div id="map"></div>
+  </div>
+
   <dialog id="conditions-report">
-    <form method="dialog">
-      <h1>How was it out there?</h1>
+    <form method="dialog" class="conditions">
+      <h2 class="section-heading mb-4">How was it out there?</h2>
       <label for="resort">Resort:</label>
       <select name="resort" id="" v-on:change="onChange($event)">
         <option v-for="resort in resorts" v-bind:key="resort.id" v-bind:value="resort.id">{{ resort.name }}</option>
@@ -174,4 +216,20 @@ export default {
   </dialog>
 </template>
 
-<style></style>
+<style>
+#map {
+  position: absolute;
+  top: 100;
+  bottom: 100;
+  width: 1150px;
+  height: 600px;
+}
+.mapboxgl-popup-content {
+  position: relative;
+  background: #fff;
+  border-radius: 3px;
+  box-shadow: 0 1px 2pxrgba (0, 0, 0, 0.1);
+  padding: 5px 15px 0px;
+  pointer-events: auto;
+}
+</style>
