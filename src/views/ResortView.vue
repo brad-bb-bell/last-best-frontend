@@ -1,5 +1,4 @@
 <script>
-// import { throwStatement } from "@babel/types";
 import axios from "axios";
 export default {
   data: function () {
@@ -17,6 +16,17 @@ export default {
       favResortId: "",
       isToDo: false,
       isFavorite: false,
+      key: "e8c4a7ef5010d3341b6a986a3a027ac2",
+      currentTemp: "",
+      currentWeather: "",
+      currentWeatherIcon: "",
+      currentFeelsLike: "",
+      forecast: {},
+      forecastDayOne: {},
+      forecastDayOneHigh: "",
+      forecastDayTwo: {},
+      forecastDayThree: {},
+      splitString: [],
     };
   },
   created: function () {
@@ -26,6 +36,61 @@ export default {
       this.events = this.resort.events;
       this.conditions_reports = this.resort.conditions_reports.reverse();
       console.log(response.data);
+      fetch(
+        "https://api.openweathermap.org/data/2.5/weather?lat=" +
+          this.resort.lat +
+          "&lon=" +
+          this.resort.long +
+          "&appid=" +
+          this.key +
+          "&units=imperial"
+      )
+        .then(function (resp) {
+          return resp.json();
+        })
+        .then((data) => {
+          console.log(data);
+          this.currentWeather = data.weather[0].description;
+          this.currentWeatherIcon = "http://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png";
+          this.currentTemp = data.main.temp;
+          this.currentFeelsLike = data.main.feels_like;
+        });
+      fetch(
+        "https://api.openweathermap.org/data/2.5/onecall?lat=" +
+          this.resort.lat +
+          "&lon=" +
+          this.resort.long +
+          "&lang={en}&units=imperial&exclude=current,minutely,hourly,alerts&appid=" +
+          this.key
+      )
+        .then(function (resp) {
+          return resp.json();
+        })
+        .then((data) => {
+          console.log(data);
+          this.forecast = data;
+          for (let index = 0; index < 3; index++) {
+            if (index === 0) {
+              this.forecastDayOne = this.forecast.daily[index];
+              let unixTimestamp = this.forecastDayOne.dt;
+              this.forecastDayOneDate = new Date(unixTimestamp * 1000);
+              this.forecastDayOneDate = this.forecastDayOneDate.getDay();
+              this.forecastDayOneDate = this.forecastDay(this.forecastDayOneDate);
+            } else if (index === 1) {
+              this.forecastDayTwo = this.forecast.daily[index];
+              let unixTimestamp = this.forecastDayTwo.dt;
+              this.forecastDayTwoDate = new Date(unixTimestamp * 1000);
+              this.forecastDayTwoDate = this.forecastDayTwoDate.getDay();
+              this.forecastDayTwoDate = this.forecastDay(this.forecastDayTwoDate);
+            } else if (index === 2) {
+              this.forecastDayThree = this.forecast.daily[index];
+              let unixTimestamp = this.forecastDayThree.dt;
+              this.forecastDayThreeDate = new Date(unixTimestamp * 1000);
+              this.forecastDayThreeDate = this.forecastDayThreeDate.getDay();
+              this.forecastDayThreeDate = this.forecastDay(this.forecastDayThreeDate);
+            }
+          }
+        });
     });
     axios.get("/users/" + localStorage.user_id + ".json").then((response) => {
       this.userToDos = response.data.to_do_resorts;
@@ -78,6 +143,23 @@ export default {
         });
       }
     },
+    forecastDay(integer) {
+      if (integer === 1) {
+        return "Monday";
+      } else if (integer === 2) {
+        return "Tuesday";
+      } else if (integer === 3) {
+        return "Wednesday";
+      } else if (integer === 4) {
+        return "Thursday";
+      } else if (integer === 5) {
+        return "Friday";
+      } else if (integer === 6) {
+        return "Saturday";
+      } else {
+        return "Sunday";
+      }
+    },
   },
 };
 </script>
@@ -109,6 +191,38 @@ export default {
           <div class="bg-faded p-5 rounded">
             <span class="section-heading-upper">
               <h1>{{ resort.name }}</h1>
+              <img v-bind:src="currentWeatherIcon" />
+              Currently:
+              <b>{{ currentWeather }}</b>
+              <br />
+              Temp:
+              <strong>{{ Math.round(currentTemp) }}&deg;</strong>
+              , Feels like:
+              <strong>{{ Math.round(currentFeelsLike) }}&deg;</strong>
+
+              <p></p>
+              <span class="section-heading-lower"><h3>3 Day Forecast</h3></span>
+              {{ this.forecastDayOneDate }}:
+              <strong>{{ forecastDayOne.weather[0].description }},</strong>
+              Temps:
+              <strong>{{ Math.round(forecastDayOne.temp.max) }}&deg;</strong>
+              /
+              <strong>{{ Math.round(forecastDayOne.temp.min) }}&deg;</strong>
+              <br />
+              {{ this.forecastDayTwoDate }}:
+              <strong>{{ forecastDayTwo.weather[0].description }},</strong>
+              Temps:
+              <strong>{{ Math.round(forecastDayTwo.temp.max) }}&deg;</strong>
+              /
+              <strong>{{ Math.round(forecastDayTwo.temp.min) }}&deg;</strong>
+              <br />
+              {{ this.forecastDayThreeDate }}:
+              <strong>{{ forecastDayThree.weather[0].description }},</strong>
+              Temps:
+              <strong>{{ Math.round(forecastDayThree.temp.max) }}&deg;</strong>
+              /
+              <strong>{{ Math.round(forecastDayThree.temp.min) }}&deg;</strong>
+              <br />
             </span>
           </div>
         </div>

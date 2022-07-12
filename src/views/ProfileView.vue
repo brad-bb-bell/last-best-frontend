@@ -81,9 +81,15 @@ export default {
             <p class="mb-0">
               Bridger Bowl: 12 days, 73%
               <br />
+              ⭐⭐⭐⭐⭐: 5/12 ⭐⭐⭐⭐: 5/12 ⭐⭐⭐: 1/12 ⭐⭐: 1/12
+              <br />
               Big Sky: 3 days, 20%
               <br />
+              ⭐⭐⭐⭐⭐: 2/3 ⭐⭐⭐⭐: 1/3
+              <br />
               Whitefish: 1 days, 7%
+              <br />
+              ⭐⭐⭐⭐: 1/1
             </p>
           </div>
         </div>

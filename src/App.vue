@@ -43,23 +43,7 @@ export default {
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mx-auto">
           <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="/">Home</a></li>
-          <div class="dropdown">
-            <button
-              class="btn btn-secondary dropdown-toggle"
-              type="button"
-              id="dropdownMenu2"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              Dropdown
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-              <button class="dropdown-item" type="button">Action</button>
-              <button class="dropdown-item" type="button">Another action</button>
-              <button class="dropdown-item" type="button">Something else here</button>
-            </div>
-          </div>
+          <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="/resorts">Resorts</a></li>
           <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="/events">Events</a></li>
           <li class="nav-item px-lg-4" v-if="!isLoggedIn">
             <router-link class="nav-link text-uppercase" to="/signup" v-if="!isLoggedIn">Signup</router-link>

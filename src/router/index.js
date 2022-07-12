@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import ResortIndex from "../views/ResortIndex.vue";
 import ResortView from "../views/ResortView.vue";
 import EventView from "../views/EventView.vue";
 import EventIndex from "../views/EventIndex.vue";
@@ -13,6 +14,11 @@ const routes = [
     path: "/",
     name: "home",
     component: HomeView,
+  },
+  {
+    path: "/resorts/",
+    name: "resorts-index",
+    component: ResortIndex,
   },
   {
     path: "/resorts/:id",
