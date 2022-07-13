@@ -10,7 +10,7 @@ export default {
       resortOfTheDay: "",
       user: {},
       newConditionsReport: {},
-      token: "pk.eyJ1IjoiYmFsbGluYmIiLCJhIjoiY2w0ZnRmcjc2MDB2ZjNicGNleGs3djhkdSJ9.lYex_nYgLLaSNFDQTe5NJw",
+      token: process.env.VUE_APP_MAPBOX_KEY,
       places: [
         { lat: 45.8174, lng: -110.8966, description: "Bridger Bowl" },
         { lat: 45.2458, lng: -111.3745, description: "Yellowstone Club" },

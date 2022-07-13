@@ -16,7 +16,7 @@ export default {
       favResortId: "",
       isToDo: false,
       isFavorite: false,
-      key: "e8c4a7ef5010d3341b6a986a3a027ac2",
+      key: process.env.VUE_APP_WEATHER_KEY,
       currentTemp: "",
       currentWeather: "",
       currentWeatherIcon: "",

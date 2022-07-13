@@ -1,0 +1,249 @@
+<header>
+  <h1 class="site-heading text-center text-faded d-none d-lg-block">
+      <span class="site-heading-upper text-primary mb-3">A Montana Ski Resort App</span>
+      <span class="site-heading-lower">Last Best</span>
+  </h1>
+</header>
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
+  <div class="container">
+      <a class="navbar-brand text-uppercase fw-bold d-lg-none" href="index.html">Start Bootstrap</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mx-auto">
+              <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="index.html">Home</a></li>
+              <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="about.html">About</a></li>
+              <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="products.html">Products</a></li>
+              <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="store.html">Store</a></li>
+          </ul>
+      </div>
+  </div>
+</nav>
+<section class="page-section clearfix">
+  <div class="container">
+      <div class="intro">
+          <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="assets/img/intro.jpg" alt="..." />
+          <div class="intro-text left-0 text-center bg-faded p-5 rounded">
+              <h2 class="section-heading mb-4">
+                  <span class="section-heading-upper">Fresh Coffee</span>
+                  <span class="section-heading-lower">Worth Drinking</span>
+              </h2>
+              <p class="mb-3">Every cup of our quality artisan coffee starts with locally sourced, hand picked ingredients. Once you try it, our coffee will be a blissful addition to your everyday morning routine - we guarantee it!</p>
+              <div class="intro-button mx-auto"><a class="btn btn-primary btn-xl" href="#!">Visit Us Today!</a></div>
+          </div>
+      </div>
+  </div>
+</section>
+<section class="page-section cta">
+  <div class="container">
+      <div class="row">
+          <div class="col-xl-9 mx-auto">
+              <div class="cta-inner bg-faded text-center rounded">
+                  <h2 class="section-heading mb-4">
+                      <span class="section-heading-upper">Our Promise</span>
+                      <span class="section-heading-lower">To You</span>
+                  </h2>
+                  <p class="mb-0">When you walk into our shop to start your day, we are dedicated to providing you with friendly service, a welcoming atmosphere, and above all else, excellent products made with the highest quality ingredients. If you are not satisfied, please let us know and we will do whatever we can to make things right!</p>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+<footer class="footer text-faded text-center py-5">
+  <div class="container"><p class="m-0 small">Copyright &copy; Your Website 2022</p></div>
+</footer>
+
+
+
+
+
+<nav>
+  <router-link to="/">Home</router-link>
+  |
+  <router-link to="/events">Events</router-link>
+  |
+  <router-link to="/signup" v-if="!isLoggedIn">Signup</router-link>
+  |
+  <router-link to="/login" v-if="!isLoggedIn">Login</router-link>
+  |
+  <router-link v-if="isLoggedIn" :to="`/users/${user_id}`">Profile</router-link>
+  |
+  <router-link to="/logout" v-if="isLoggedIn">Logout</router-link>
+</nav>
+
+
+
+<section class="page-section clearfix">
+    <div class="container">
+      <div class="intro">
+        <a v-on:click="showResort(resortOfTheDay.id)">
+          <img
+            class="intro-img img-fluid mb-3 mb-lg-0 rounded"
+            v-bind:src="resortOfTheDay.image"
+            v-bind:alt="resortOfTheDay.name"
+          />
+        </a>
+        <div class="intro-text left-0 text-center bg-faded p-5 rounded">
+          <h2 class="section-heading mb-4">
+            <span class="section-heading-upper">Welcome Back</span>
+            <span class="section-heading-lower">{{ user.username }}</span>
+            <span class="section-heading-upper">ski days: {{ user.days_skied }}</span>
+          </h2>
+          <p class="mb-3">
+            Did you ski or snowboard today? Please take the time to rate your day and submit a conditions report to help
+            community members get an honest sense of the current conditions.
+          </p>
+          <div class="intro-button mx-auto">
+            <a class="btn btn-primary btn-xl" href="#!">Submit Conditions Report</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="page-section">
+    <div class="container">
+      <div class="product-item">
+        <div class="product-item-title d-flex">
+          <div class="bg-faded p-5 d-flex me-auto rounded">
+            <h2 class="section-heading mb-0">
+              <span class="section-heading-upper">Welcome Back</span>
+              <span class="section-heading-lower">{{ user.username }}</span>
+              <span class="section-heading-upper">ski days: {{ user.days_skied }}</span>
+              <br />
+              <div class="intro-button mx-auto">
+                <a class="btn btn-primary btn-xl" v-on:click="createConditionsReport()">Conditions Report</a>
+              </div>
+            </h2>
+          </div>
+        </div>
+        <a v-on:click="showResort(resortOfTheDay.id)">
+          <img
+            class="intro-img img-fluid mb-3 mb-lg-0 rounded"
+            v-bind:src="resortOfTheDay.image"
+            v-bind:alt="resortOfTheDay.name"
+          />
+        </a>
+        
+      </div>
+    </div>
+  </section>
+  
+  <p>
+    Did you ski or snowboard today? Please take the time to rate your day and submit a conditions report to
+    help community members get an honest sense of the current conditions.
+  </p>
+
+  <section class="page-section about-heading">
+    <div class="container">
+        <img class="img-fluid rounded about-heading-img mb-3 mb-lg-0" src="assets/img/about.jpg" alt="..." />
+        <div class="about-heading-content">
+            <div class="row">
+                <div class="col-xl-9 col-lg-10 mx-auto">
+                    <div class="bg-faded rounded p-5">
+                        <h2 class="section-heading mb-4">
+                            <span class="section-heading-upper">Strong Coffee, Strong Roots</span>
+                            <span class="section-heading-lower">About Our Cafe</span>
+                        </h2>
+                        <p>Founded in 1987 by the Hernandez brothers, our establishment has been serving up rich coffee sourced from artisan farmers in various regions of South and Central America. We are dedicated to travelling the world, finding the best coffee, and bringing back to you here in our cafe.</p>
+                        <p class="mb-0">
+                            We guarantee that you will fall in
+                            <em>lust</em>
+                            with our decadent blends the moment you walk inside until you finish your last sip. Join us for your daily routine, an outing with friends, or simply just to enjoy some alone time.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>
+  
+  <div class="resorts-show">
+    <h1>{{ resort.name }}</h1>
+    To Do
+    <input type="checkbox" v-model="isToDo" v-on:click="toDoResort()" />
+    Favorite
+    <input type="checkbox" v-model="isFavorite" v-on:click="favoriteResort()" />
+    <p><img v-bind:src="resort.image" v-bind:key="resort.id" v-bind:alt="resort.name" /></p>
+    <table class="table table-hover table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Resort</th>
+          <th scope="col">Vertical</th>
+          <th scope="col">Acres</th>
+          <th scope="col">Elevation Top</th>
+          <th scope="col">Elevation Base</th>
+          <th scope="col">Avg Snowfall</th>
+          <th scope="col">Chair lifts</th>
+          <th scope="col">Surface Lifts</th>
+          <th scope="col">Total lifts</th>
+          <th scope="col">Terrain Park</th>
+          <th scope="col">Night Skiing</th>
+          <th scope="col">Ticket Price</th>
+          <th scope="col">Opening Day</th>
+          <th scope="col">Closing Day</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>{{ resort.name }}</th>
+          <td>{{ resort.vertical_gain }}'</td>
+          <td>{{ resort.acres }}</td>
+          <td>{{ resort.elevation_top }}'</td>
+          <td>{{ resort.elevation_base }}'</td>
+          <td>{{ resort.average_snowfall }}"</td>
+          <td>{{ resort.chairlifts }}</td>
+          <td>{{ resort.surface_lifts }}</td>
+          <td>{{ resort.total_lifts }}</td>
+          <td>{{ resort.terrain_park }}</td>
+          <td>{{ resort.night_skiing }}</td>
+          <td>${{ resort.ticket_price }}</td>
+          <td>{{ resort.opening_day }}</td>
+          <td>{{ resort.closing_day }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="profile">
+    <h1>{{ user.username }}</h1>
+    ski days this season: {{ user.days_skied }}
+  </div>
+  home resort: {{ homeResort.name }}
+  <img
+    v-bind:src="homeResort.logo"
+    v-bind:key="homeResort.id"
+    v-bind:alt="homeResort.name"
+    v-on:click="showResort(homeResort.id)"
+  />
+  <br />
+  <div v-for="toDoResort in toDoResorts" v-bind:key="toDoResort.id">
+    to do resort: {{ toDoResort.name }}
+    <img
+      v-bind:src="toDoResort.logo"
+      v-bind:key="toDoResort.id"
+      v-bind:alt="toDoResort.name"
+      v-on:click="showResort(toDoResort.resort_id)"
+    />
+  </div>
+  <div v-for="favoriteResort in favoriteResorts" v-bind:key="favoriteResort.id">
+    favorite resort: {{ favoriteResort.name }}
+    <img
+      v-bind:src="favoriteResort.logo"
+      v-bind:key="favoriteResort.id"
+      v-bind:alt="favoriteResort.name"
+      v-on:click="showResort(favoriteResort.resort_id)"
+    />
+  </div>
+
+  <p class="mb-0">
+    ⭐⭐⭐⭐⭐: 5 days, 33%
+    <br />
+    ⭐⭐⭐⭐: 3 days, 20%
+    <br />
+    ⭐⭐⭐: 4 days, 27%
+    <br />
+    ⭐⭐: 2 days, 13%
+    <br />
+    ⭐: 1 day, 7%
+  </p>
