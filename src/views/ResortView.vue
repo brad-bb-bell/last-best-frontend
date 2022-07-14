@@ -99,14 +99,12 @@ export default {
         if (this.resortName === toDoResort.name) {
           this.isToDo = true;
           this.toDoResortId = toDoResort.id;
-          console.log("to do id", this.toDoResortId);
         }
       });
       this.userFavs.forEach((favResort) => {
         if (this.resortName === favResort.name) {
           this.isFavorite = true;
           this.favResortId = favResort.id;
-          console.log("fav id", this.favResortId);
         }
       });
     });
