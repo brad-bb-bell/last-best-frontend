@@ -1,8 +1,13 @@
 <script>
 /* global mapboxgl */
+
 import axios from "axios";
+import StarRating from "vue-star-rating";
 
 export default {
+  components: {
+    StarRating,
+  },
   data: function () {
     return {
       resorts: [],
@@ -69,6 +74,7 @@ export default {
     },
     createConditionsReport: function () {
       document.querySelector("#conditions-report").showModal();
+      this.isModalVisible = true;
     },
     submitConditionsReport: function () {
       this.resort_id = this.newConditionsReport.resort_id;
@@ -200,19 +206,21 @@ export default {
       <select name="resort" id="" v-on:change="onChange($event)">
         <option v-for="resort in resorts" v-bind:key="resort.id" v-bind:value="resort.id">{{ resort.name }}</option>
       </select>
-      <br />
-      Rating 1-5:
-      <input type="text" v-model="newConditionsReport.rating" />
+      <p></p>
+      Rate your day from 1 to 5 stars:
+      <star-rating :show-rating="false" v-model:rating="newConditionsReport.rating"></star-rating>
+      <p></p>
       <div>
-        Conditions:
-        <input type="text" v-model="newConditionsReport.comment" />
+        Briefly describe today's conditions:
+        <p></p>
+        <textarea cols="45" v-model="newConditionsReport.comment"></textarea>
         <p></p>
         <p>
           <button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="submitConditionsReport()">
             Save
           </button>
           &nbsp;
-          <button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="close()">Cancel</button>
+          <button class="btn btn-primary btn-lg btn-block">Cancel</button>
         </p>
       </div>
     </form>
@@ -239,5 +247,8 @@ export default {
   background: #073a6d;
   color: #e6a756;
   font-family: var(--bs-body-font-family);
+}
+textarea {
+  resize: none;
 }
 </style>
