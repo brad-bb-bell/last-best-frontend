@@ -30,6 +30,22 @@ export default {
     };
   },
   created: function () {
+    axios.get("/users/" + localStorage.user_id + ".json").then((response) => {
+      this.userToDos = response.data.to_do_resorts;
+      this.userFavs = response.data.favorite_resorts;
+      this.userToDos.forEach((toDoResort) => {
+        if (this.resortName === toDoResort.name) {
+          this.isToDo = true;
+          this.toDoResortId = toDoResort.id;
+        }
+      });
+      this.userFavs.forEach((favResort) => {
+        if (this.resortName === favResort.name) {
+          this.isFavorite = true;
+          this.favResortId = favResort.id;
+        }
+      });
+    });
     axios.get("/resorts/" + this.$route.params.id).then((response) => {
       this.resort = response.data;
       this.resortName = this.resort.name;
@@ -91,22 +107,6 @@ export default {
             }
           }
         });
-    });
-    axios.get("/users/" + localStorage.user_id + ".json").then((response) => {
-      this.userToDos = response.data.to_do_resorts;
-      this.userFavs = response.data.favorite_resorts;
-      this.userToDos.forEach((toDoResort) => {
-        if (this.resortName === toDoResort.name) {
-          this.isToDo = true;
-          this.toDoResortId = toDoResort.id;
-        }
-      });
-      this.userFavs.forEach((favResort) => {
-        if (this.resortName === favResort.name) {
-          this.isFavorite = true;
-          this.favResortId = favResort.id;
-        }
-      });
     });
   },
   methods: {
