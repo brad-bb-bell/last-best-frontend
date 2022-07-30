@@ -21,7 +21,7 @@ export default {
 <template>
   <header>
     <h1 class="site-heading text-center text-faded d-none d-lg-block">
-      <span class="site-heading-upper text-primary mb-3">A Montana Ski Resort Web App</span>
+      <span class="site-heading-upper text-primary mb-3">Montana Ski Resorts</span>
       <span class="site-heading-lower">Last Best</span>
     </h1>
   </header>
