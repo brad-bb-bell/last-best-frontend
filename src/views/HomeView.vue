@@ -149,7 +149,7 @@ export default {
                 <a v-on:click="showResort(resortOfTheDay.id)">{{ resortOfTheDay.name }}</a>
               </span>
             </h2>
-            <p class="mb-3">A fun fact will be here. It will be interesting and/or cool.</p>
+            <p class="mb-3">{{ resortOfTheDay.fun_facts[0].fact }}</p>
           </div>
         </div>
       </div>
@@ -180,11 +180,11 @@ export default {
         <th scope="row">
           <a v-on:click="showResort(resort.id)">{{ resort.name }}</a>
         </th>
-        <td>{{ resort.vertical }}'</td>
+        <td>{{ resort.vertical_gain }}'</td>
         <td>{{ resort.acres }}</td>
         <td>{{ resort.elevation_top }}'</td>
         <td>{{ resort.elevation_base }}'</td>
-        <td>{{ resort.avg_snowfall }}"</td>
+        <td>{{ resort.average_snowfall }}"</td>
         <td>{{ resort.chairlifts }}</td>
         <td>{{ resort.surface_lifts }}</td>
         <td>{{ resort.total_lifts }}</td>
