@@ -40,7 +40,6 @@ export default {
   created: function () {
     this.indexResorts();
     this.showUser();
-    console.log("token", this.token);
   },
   methods: {
     compare: function (a, b) {
