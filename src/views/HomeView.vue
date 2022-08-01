@@ -14,6 +14,7 @@ export default {
       resort_id: "",
       resortOfTheDay: "",
       user: {},
+      map: {},
       newConditionsReport: {},
       token: process.env.VUE_APP_MAPBOX_KEY,
       places: [
