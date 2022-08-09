@@ -197,7 +197,7 @@ export default {
     </tbody>
   </table>
   <div>
-    <div container id="map"></div>
+    <div id="map"></div>
   </div>
 
   <dialog id="conditions-report">

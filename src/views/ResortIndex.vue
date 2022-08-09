@@ -97,11 +97,11 @@ export default {
         <th scope="row">
           <a v-on:click="showResort(resort.id)">{{ resort.name }}</a>
         </th>
-        <td>{{ resort.vertical }}'</td>
+        <td>{{ resort.vertical_gain }}'</td>
         <td>{{ resort.acres }}</td>
         <td>{{ resort.elevation_top }}'</td>
         <td>{{ resort.elevation_base }}'</td>
-        <td>{{ resort.avg_snowfall }}"</td>
+        <td>{{ resort.average_snowfall }}"</td>
         <td>{{ resort.chairlifts }}</td>
         <td>{{ resort.surface_lifts }}</td>
         <td>{{ resort.total_lifts }}</td>
