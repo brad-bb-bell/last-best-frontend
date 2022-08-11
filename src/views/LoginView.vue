@@ -36,21 +36,38 @@ export default {
 </script>
 
 <template>
-  <div class="login">
-    <form v-on:submit.prevent="submit()">
-      <h1>Login</h1>
-      <ul>
-        <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
-      </ul>
-      <div>
-        <label>Email:</label>
-        <input type="email" v-model="newSessionParams.email" />
+  <section class="page-section cta">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-9 mx-auto">
+          <div class="cta-inner bg-faded text-center rounded">
+            <h2 class="section-heading mb-4">
+              <span class="section-heading-upper">Welcome Back</span>
+              <span class="section-heading-lower">Login</span>
+            </h2>
+            <p class="mb-3">
+              Guest Login
+              <br />
+              Email: guest@test.com
+              <br />
+              Password: password
+            </p>
+            <form v-on:submit.prevent="submit()">
+              <ul>
+                <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
+              </ul>
+              <div>
+                <input type="email" placeholder="Email" v-model="newSessionParams.email" />
+              </div>
+              <div>
+                <input type="password" placeholder="Password" v-model="newSessionParams.password" />
+              </div>
+              <p></p>
+              <input type="submit" value="Login" />
+            </form>
+          </div>
+        </div>
       </div>
-      <div>
-        <label>Password:</label>
-        <input type="password" v-model="newSessionParams.password" />
-      </div>
-      <input type="submit" value="Submit" />
-    </form>
-  </div>
+    </div>
+  </section>
 </template>
