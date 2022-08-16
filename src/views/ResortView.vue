@@ -1,6 +1,11 @@
 <script>
 import axios from "axios";
+import StarRating from "vue-star-rating";
+
 export default {
+  components: {
+    StarRating,
+  },
   data: function () {
     return {
       resort: {},
@@ -280,7 +285,7 @@ export default {
               v-bind:key="conditions_report.id"
             >
               <li class="list-unstyled-item list-hours-item d-flex">
-                {{ conditions_report.rating }}/5
+                <star-rating :rating="conditions_report.rating" :show-rating="false" :star-size="30"></star-rating>
                 <span class="ms-auto">{{ conditions_report.reported_by }} on {{ conditions_report.created_at }}</span>
               </li>
               <li class="list-unstyled-item list-hours-item d-flex">
