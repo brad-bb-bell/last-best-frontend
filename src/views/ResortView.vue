@@ -285,7 +285,12 @@ export default {
               v-bind:key="conditions_report.id"
             >
               <li class="list-unstyled-item list-hours-item d-flex">
-                <star-rating :rating="conditions_report.rating" :show-rating="false" :star-size="30"></star-rating>
+                <star-rating
+                  :rating="conditions_report.rating"
+                  :show-rating="false"
+                  :star-size="30"
+                  :read-only="true"
+                ></star-rating>
                 <span class="ms-auto">{{ conditions_report.reported_by }} on {{ conditions_report.created_at }}</span>
               </li>
               <li class="list-unstyled-item list-hours-item d-flex">
